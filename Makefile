@@ -2,7 +2,7 @@
 
 default: run
 
-APP_NAME=jolang
+APP_NAME := jolang
 
 install:
 	@echo "Installing dependencies"
@@ -15,9 +15,9 @@ run:
 build:
 	@echo "Building the application"
 	@mkdir -p build
-	@flex -o  ./build/lexer.c ./src/lexer.l
-	@bison -d -o ./build/parser.c ./src/parser.y
-	@gcc -lfl -Wimplicit-function-declaration -o ./build/${APP_NAME} ./build/parser.c ./build/lexer.c
+	@lex -o ./build/lexer.c ./src/lexer.l
+	@yacc -d -o ./build/parser.c ./src/parser.y 
+	@g++ -lfl -o ./build/${APP_NAME} ./build/parser.c
 
 clean:
 	@echo "Cleaning the application"
